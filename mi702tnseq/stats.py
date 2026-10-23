@@ -41,17 +41,25 @@ def benjamini_hochberg(pvalues):
 
 
 def permutation_floor(n_a, n_b, n_tests=1, n_at_floor=1, alpha=0.05):
-    """Smallest p a permutation test can produce, and what BH does with it.
+    """Resolution limits of a permutation test with n_a vs n_b replicates.
 
-    Replication, not sequencing depth, sets the floor on p: with 4 vs 4 there
-    are only C(8,4)/2 = 35 distinct ways to split the samples, so no p-value
-    below 1/35 = 0.029 can exist no matter how deeply you sequence.
+    Parameters
+    ----------
+    n_a, n_b : int
+        Replicates in each group.
+    n_tests : int
+        Number of genes tested, used for the Benjamini-Hochberg correction.
+    n_at_floor : int
+        How many genes share the smallest p-value. Count this from your own
+        results; it changes the achievable q.
+    alpha : float
+        Significance threshold.
 
-    Whether that floor also blocks significance depends on how many genes TIE
-    at it, because Benjamini-Hochberg divides by rank: k genes sharing the
-    minimum p all get q = p_min * n_tests / k. Pass `n_at_floor` to get the
-    achievable q; `genes_needed_at_floor` is how many would have to tie for
-    anything to clear `alpha`.
+    Returns
+    -------
+    dict with `distinct_splits`, `min_possible_p`, `genes_tied_at_floor`,
+    `q_for_those_genes`, `genes_needed_at_floor` and
+    `reachable_with_this_many_ties`.
     """
     total = math.comb(n_a + n_b, n_a)
     distinct = total // 2 if n_a == n_b else total
