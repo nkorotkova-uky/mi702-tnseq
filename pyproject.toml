@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mi702tnseq"
+version = "1.0.0"
+description = "Tn-seq analysis support package for MI 702 Applied Infection and Immunity"
+requires-python = ">=3.9"
+dependencies = ["numpy>=1.21", "pandas>=1.3", "scipy>=1.7", "matplotlib>=3.4"]
+
+[tool.setuptools]
+packages = ["mi702tnseq"]

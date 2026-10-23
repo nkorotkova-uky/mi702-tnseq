@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+mi702_data/
+demux/
+trimmed/
+build/
+dist/
+*.egg-info/
